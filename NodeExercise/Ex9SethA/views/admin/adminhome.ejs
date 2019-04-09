@@ -1,0 +1,46 @@
+<html>
+
+<head>
+    <!-- Require meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <% include ../partials/header %>
+    <title>Admin's Home</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Welcome to Admin's Home Page</h1><br>
+        <a href="/admin/imageUpload" class="btn btn-primary" role="button">Upload an Image</a><br>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Image</th>
+                    <th scope="col">Size (bytes)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (const image of images) { %>
+                <tr>
+                    <td><img src="/public/images/<%=image.filename%>" height=100 width=100></td>
+                    <td><%=image.size%></td>
+                    <td>
+                        <form action="/admin/deleteImage" method="POST">
+                            <input type="hidden" name="_id" value="<%=image._id%>">
+                            <input type="hidden" name="filename" value="<%=image.filename%>">
+                            <button type="submit">DEL</button>
+                        </form>
+                    </td>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+        <a href="/profile" class="btn btn-primary" role="button">Your Profile</a>
+        <a href="/logout" class="btn btn-primary" role="button">Logout</a>
+        <a href="/admin/manageUsers" class="btn btn-primary" role="button">Manage Users</a>
+    </div>
+    <% include ../partials/scripts %>
+</body>
+
+</html>

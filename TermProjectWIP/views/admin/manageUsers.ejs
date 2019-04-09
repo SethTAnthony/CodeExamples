@@ -1,0 +1,43 @@
+<html>
+
+<head>
+    <!-- Require meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <% include ../partials/header %>
+    <title>Manage Users</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Manage Users</h1><br>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Email</th>
+                    <th scope="col">Full Name</th>
+                    <th scope="col">Admin?</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (const user of users) { %>
+                <tr>
+                    <td><%= user.email %></td>
+                    <td><%= user.fullname %></td>
+                    <td><%= user.admin %></td>
+                    <td>
+                        <form action="/admin/deleteUser" method="POST">
+                            <input type="hidden" name="_id" value="<%=user._id%>">
+                            <button type="submit">DEL</button>
+                        </form>
+                    </td>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+    <% include ../partials/scripts %>
+</body>
+
+</html>

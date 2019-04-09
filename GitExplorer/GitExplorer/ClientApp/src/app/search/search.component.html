@@ -1,0 +1,38 @@
+<div class="container">
+
+  <div class="jumbotron">
+
+    <h1 class="display-4">Search Page</h1><br />
+
+    <form>
+
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="searchRadio" [(ngModel)]="searchRadio" id="userRadio" value="user" checked="">
+        <label class="form-check-label active" for="userRadio">
+          User
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="searchRadio" [(ngModel)]="searchRadio" id="repoRadio" value="repo">
+        <label class="form-check-label" for="repoRadio">
+          Repository
+        </label>
+      </div>
+      <br />
+      <div class="form-group">
+        <label for="searchString">Name:</label>
+        <input name="searchString" type="text" [(ngModel)]="searchString"
+               class="form-control" id="searchString" placeholder="Enter User or Repository search here." />
+      </div>
+
+      <button type="button" (click)="search()" class="btn btn-primary">Search</button>
+
+    </form>
+
+  </div>
+</div>
+<app-user-search-display [searchString]="searchString" *ngIf="userResult" ></app-user-search-display>
+
+<div *ngIf="repoResult">
+  <app-repo-search-display [searchString]="searchString"></app-repo-search-display>
+</div>

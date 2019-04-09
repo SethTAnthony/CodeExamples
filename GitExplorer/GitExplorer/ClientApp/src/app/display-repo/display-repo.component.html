@@ -1,0 +1,99 @@
+<div class="container">
+  <div class="jumbotron">
+    <div *ngIf="!repoLoading && !searchFailed">
+      <h1 class="display-4">Repository:<br />{{repo.name}}<br /></h1>
+      <table class="table">
+        <tr>
+          <td>Github Url</td>
+          <td><a href="{{repo.svn_url}}">{{repo.svn_url}}</a></td>
+        </tr>
+        <tr *ngIf="repo.description">
+          <td>Description</td>
+          <td>{{repo.description}}</td>
+        </tr>
+        <tr *ngIf="repo.stargazers_count">
+          <td>Stars</td>
+          <td>{{repo.stargazers_count}}</td>
+        </tr>
+        <tr *ngIf="repo.watchers_count">
+          <td>Watchers</td>
+          <td>{{repo.watchers_count}}</td>
+        </tr>
+        <tr *ngIf="repo.forks_count">
+          <td>Forks</td>
+          <td>{{repo.forks_count}}</td>
+        </tr>
+        <tr *ngIf="repo.open_issues_count">
+          <td>Open Issues</td>
+          <td>{{repo.open_issues_count}}</td>
+        </tr>
+        <tr *ngIf="repo.language">
+          <td>Language</td>
+          <td>{{repo.language}}</td>
+        </tr>
+        <tr *ngIf="repo.clone_url">
+          <td>Clone URL</td>
+          <td><a href="{{repo.clone_url}}">{{repo.clone_url}}</a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="row">
+      <div *ngIf="!commitsLoading && commits">
+        <p class="h3">Recent Commits</p>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Author</th>
+              <th>Link</th>
+              <th>Message</th>
+              <th>Comment Count</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let commit of commits">
+              <td>
+                <div *ngIf="commit.committer">
+                  <a [routerLink]='["/user",commit.committer.login]'>
+                    {{commit.committer.login}}
+                  </a>
+                </div>
+              </td>
+              <td><a href="{{commit.html_url}}">Link</a></td>
+              <td>{{commit.commit.message}}</td>
+              <td>{{commit.commit.comment_count}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div *ngIf="!issuesLoading && issues.length != 0">
+      <p class="h3">Open Issues</p>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Date Created</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let issue of issues">
+            <td><a href="{{issue.html_url}}">{{issue.title}}</a></td>
+            <td>{{issue.created_at | date:'short'}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div *ngIf="currentIssuePage != 1">
+        <button class="btn btn-primary" (click)="prevIssue()">Prev</button><br /><br />
+      </div>
+      <div *ngIf="currentIssuePage != totalIssuePages">
+        <button class="btn btn-primary" (click)="nextIssue()">Next</button><br /><br />
+      </div>
+    </div>
+  </div>
+</div>
+<div class="alert alert-warning" role="alert" *ngIf="searchFailed">
+  Search Failed, try again.
+</div>
+
+
+

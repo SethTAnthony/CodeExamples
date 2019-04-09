@@ -1,0 +1,27 @@
+<html>
+
+<head>
+    <!-- Require meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <% include ./partials/header %>
+    <title>User's Home</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>User's Home Page</h1>
+        <h3>
+            Name: <%= user.fullname %>
+        </h3>
+        <a href="/profile" class="btn btn-primary" role="button">Your Profile</a>
+        <a href="/logout" class="btn btn-primary" role="button">Logout</a>
+        <% if (user.admin) { %>
+            <a href="/admin/home" class="btn btn-primary" role="button">Go to Admin's Page</a>
+        <% } %>
+    </div>
+    <% include ./partials/scripts %>
+</body>
+
+</html>

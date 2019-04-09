@@ -1,0 +1,95 @@
+<div *ngIf="!loadingUser && !searchFailed">
+  <div class="container">
+    <div class="jumbotron">
+      <div class="row">
+      </div>
+      <div class="row">
+        <div class="col md-3">
+          <img src="{{user.avatar_url}}" height="200" width="200" />
+        </div>
+        <div class="col md-3">
+          <h5 class="display-4">{{user.login}}</h5>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <table class="table">
+          <tr *ngIf="user.name">
+            <td>Name</td>
+            <td>{{user.name}}</td>
+          </tr>
+          <tr *ngIf="user.blog">
+            <td>Blog</td>
+            <td><a href="{{user.blog}}">{{user.blog}}</a></td>
+          </tr>
+          <tr *ngIf="user.location">
+            <td>Location</td>
+            <td>{{user.location}}</td>
+          </tr>
+          <tr>
+            <td>Github Profile</td>
+            <td><a href="{{user.html_url}}">{{user.html_url}}</a></td>
+          </tr>
+        </table>
+        <div class="row">
+          <div class="col md-4">
+            <div *ngIf="!loadingFollowers">
+              <p class="h3">Followers</p><br />
+              <div *ngIf="followers.length > 0">
+                <table class="table table-striped">
+                  <thead class="thead-light">
+                    <tr>
+                      <th scope="col">Avatar</th>
+                      <th scope="col">Name</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let follower of followers">
+                      <td><img src="{{follower.avatar_url}}" height="50" width="50" /></td>
+                      <td><a [routerLink]='["/user", follower.login]'>{{follower.login}}</a></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div *ngIf="followers.length < 1">
+                <p class="h5">This user has no followers.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col md-8">
+            <div *ngIf="!loadingRepos">
+              <p class="h3">Repositories</p><br />
+              <div *ngIf="repos.length > 0">
+                <table class="table table-striped">
+                  <thead class="thead-light">
+                    <tr>
+                      <th scope="col">Name</th>
+                      <th scope="col">Stars</th>
+                      <th scope="col">Open Issues</th>
+                      <th scope="col">Language</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let repo of repos">
+                      <td><a [routerLink]='["/repo", repo.owner.login, repo.name]'>{{repo.name}}</a></td>
+                      <td>{{repo.stargazers_count}}</td>
+                      <td>{{repo.open_issues_count}}</td>
+                      <td>{{repo.language}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div *ngIf="repos.length < 1">
+                <p class="h5">This user has no public repositories.</p>
+              </div>
+            </div>
+          </div>
+          <br />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="alert alert-warning" role="alert" *ngIf="searchFailed">
+  Search Failed, try again.
+</div>

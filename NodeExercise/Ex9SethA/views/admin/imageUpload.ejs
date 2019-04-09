@@ -1,0 +1,24 @@
+<html>
+
+<head>
+    <!-- Require meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <% include ../partials/header %>
+    <title>Upload an Image</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Upload an Image</h1>
+
+        <form action="/admin/imageUpload" method="POST" enctype="multipart/form-data">
+            <input type="file" name="imageButton"><br>
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+    <% include ../partials/scripts %>
+</body>
+
+</html>

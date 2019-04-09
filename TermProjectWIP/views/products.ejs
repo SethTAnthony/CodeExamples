@@ -1,0 +1,40 @@
+<html>
+
+<head>
+    <!-- Require meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <% include ./partials/header %>
+    <title>PDC Products</title>
+</head>
+
+<body>
+    <% include ./partials/nav %>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Prairie Dragon Crafts Product Page</h1>
+            <div class="row">
+                <% for (const category of categories) { %>
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img src="/public/images/categories/<%=category.image%>" class="card-img-top" alt="" height="200" width="100">
+                        <div class="card-body">
+                            <h5 class="card-title"><%=category.category%></h5>
+                            <p class="card-text"><%=category.description%></p>
+                            <form action="/products/category" method="POST">
+                                <input name="category" type="hidden" value="<%=category.category%>">
+                                <button class="btn btn-primary" type="submit">Explore</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+    </div>
+    <% include ./partials/scripts %>
+</body>
+
+</html>

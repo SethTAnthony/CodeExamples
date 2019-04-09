@@ -1,0 +1,36 @@
+<html>
+
+<head>
+    <!-- Require meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <% include ./partials/header %>
+    <title>PDC Products</title>
+</head>
+
+<body>
+    <% include ./partials/nav %>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Prairie Dragon Crafts About Us Page</h1>
+            <div class="row">
+                <% for (const artist of artists) { %>
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img src="/public/images/artists/<%=artist.image%>" class="card-img-top" alt="" height="200" width="100">
+                        <div class="card-body">
+                            <h5 class="card-title"><%=artist.name%></h5>
+                            <p class="card-text"><%=artist.description%></p>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+    </div>
+    <% include ./partials/scripts %>
+</body>
+
+</html>

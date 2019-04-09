@@ -1,0 +1,48 @@
+<div *ngIf="!loading && !searchFailed">
+  <div class="container">
+    <div class="jumbotron">
+      <h1 class="display-4">User Search Results</h1>
+
+      <!-- Only show display table if there were results-->
+      <div *ngIf="results.total_count > 0">
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Image</th>
+              <th scope="col">Login</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of results.items">
+              <td>
+                <img src="{{item.avatar_url}}" height="50" width="50">
+              </td>
+              <td>
+                <a [routerLink]='["/user", item.login]'>{{item.login}}</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Prev and Next Button Code -->
+        <div *ngIf="currentPage != 1">
+          <button class="btn btn-primary" (click)="prevPage()">Prev</button><br /><br />
+        </div>
+        <div *ngIf="currentPage != totalPages">
+          <button class="btn btn-primary" (click)="nextPage()">Next</button><br /><br />
+        </div>
+
+      </div>
+
+      <!-- If no results were returned -->
+      <div *ngIf="results.total_count == 0">
+        <h1 class="h3">No Results Found</h1>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class="alert alert-warning" role = "alert" *ngIf="searchFailed">
+  Search Failed, try again.
+</div>
